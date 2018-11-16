@@ -1,6 +1,6 @@
-require 'rails_helper'
-
 class UsersController < ApplicationController
 
+  def new
+  end
 
 end

@@ -1,5 +1,10 @@
 require 'rails_helper'
 
-Rspec.describe UsersController, type: :controller do
-  
+RSpec.describe UsersController, type: :controller do
+  describe "GET #new" do
+    it 'renders the new user template' do
+      get :new
+      expect(response).to render_template(:new)
+    end
+  end
 end
