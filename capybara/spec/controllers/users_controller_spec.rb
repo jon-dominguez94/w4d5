@@ -21,8 +21,21 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to(user_url(user))
       end
     end
-    context 'without valid params' do
+    context 'with invalid params' do
+      it 'redirects to the new user page and shows errors' do
+        post :create, params: { user: { password: 'password' }}
+        expect(response).to render_template(:new)
+        expect(flash[:errors]).to be_present
+      end
+    end
+  end
 
+  describe "GET #show" do
+    it 'renders the user\'s page' do
+      User.create(username: 'savio', password: 'password')
+      user = User.find_by(username: 'savio')
+      get :show, params: {id: user.id}
+      expect(response).to render_template(:show)
     end
   end
 end
